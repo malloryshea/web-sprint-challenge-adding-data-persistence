@@ -1,10 +1,15 @@
 // build your `/api/resources` router here
 const express = require('express');
-
+const Resources = require('./model');
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    res.send('resource endpoint is working')
+router.get('/', async (req, res, next) => {
+    try {
+        const resourceList = await Resources.getResources()
+        res.status(200).json(resourceList)
+    } catch(err){
+        next(err)
+    }
 })
 
 module.exports = router; 
