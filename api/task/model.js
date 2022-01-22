@@ -17,16 +17,17 @@ async function getTasks() {
   
 }
 
-async function createTask(task) {
-  const [id] = await db("tasks").insert(task);
-  const newTask = await db("tasks").where("task_id", id);
+async function createTask(task){
+    const [ id ] = await db('tasks').insert(task)
+    const newTask = await db('tasks')
+    .where('task_id', id)
 
-  newTask[0].task_completed = newTask[0].task_completed === 0 ? false : true;
+    newTask[0].task_completed =
+    newTask[0].task_completed === 0 ? false : true;
 
-  return newTask[0];
+    return newTask[0]
 }
-
 module.exports = {
-  getTasks,
-  createTask,
-};
+    getTasks,
+    createTask
+} 
